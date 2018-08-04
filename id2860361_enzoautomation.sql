@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 04, 2018 at 05:08 AM
+-- Generation Time: Aug 04, 2018 at 05:39 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.0.26
 
@@ -25,127 +25,172 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Customer`
+-- Table structure for table `department_store`
 --
 
-CREATE TABLE `Customer` (
-  `first_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `contact_no` bigint(10) NOT NULL,
-  `address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_ID` int(4) NOT NULL,
-  `RFID` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(12) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE `department_store` (
+  `Dept_id` int(4) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `Contact_no` int(10) NOT NULL,
+  `Address` varchar(100) NOT NULL,
+  `Manager_SSN` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Customer`
+-- Dumping data for table `department_store`
 --
 
-INSERT INTO `Customer` (`first_name`, `last_name`, `contact_no`, `address`, `customer_ID`, `RFID`, `password`) VALUES
-('Chirayu', 'Kapoor', 9876543210, 'VIT university', 1000, 'csociety', 'chirayu'),
-('Shivam', 'Kaushik', 8765437689, 'VIT Uhniversity', 1002, 'ieeevit1', 'crackajack'),
-('Pradeep', 'Kumar', 9092343477, 'Vit university', 1003, 'Isoivit', 'foodie1'),
-('Parth', 'Sharma', 9834672543, 'VIT university', 1005, 'csivit', 'yipeemag'),
-('gurpreet', 'singh', 7894561230, 'punjab', 1012, 'gurpreet', 'gurpreet'),
-('Shivam', '', 0, '', 1014, '', '');
+INSERT INTO `department_store` (`Dept_id`, `Name`, `Contact_no`, `Address`, `Manager_SSN`) VALUES
+(1, 'ENZO', 1234511111, 'VIT', 104);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Employee`
+-- Table structure for table `employee`
 --
 
-CREATE TABLE `Employee` (
+CREATE TABLE `employee` (
   `first_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `last_name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `salary` int(10) NOT NULL,
   `sex` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   `designation` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `employee_ID` int(4) NOT NULL,
+  `Emp_SSN` int(4) NOT NULL,
   `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `Employee`
+-- Dumping data for table `employee`
 --
 
-INSERT INTO `Employee` (`first_name`, `last_name`, `salary`, `sex`, `designation`, `employee_ID`, `password`) VALUES
-('admin', NULL, 40000, 'MALE', 'ADMIN', 101, 'chirayu'),
-('Gursimran', 'kalo', 30000, 'MALE', 'Sweeper', 102, 'gursimran'),
-('Rohit', 'Sachdeva', 35000, 'MALE', 'Employee', 103, 'rohan'),
-('Pradeep', 'Kumar', 20000, 'MALE', 'Employee', 104, 'pradeep'),
-('Tina', 'Gupta', 32000, 'FEMALE', 'Cashier', 105, 'tina'),
-('Vaibhav', 'Bansal', 20, 'MALE', 'Packer', 106, 'vaibhav'),
-('Suresh', 'Garg', 25000, 'Male', 'Finance Manager', 107, 'honcruix'),
-('Radheshyam', 'Sharma', 20000, 'Male', 'Cook', 116, 'astaalavista');
+INSERT INTO `employee` (`first_name`, `last_name`, `salary`, `sex`, `designation`, `Emp_SSN`, `password`) VALUES
+('admin', NULL, 40000, 'MALE', 'ADMIN', 101, 'chirayu');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Item_ordered`
+-- Table structure for table `item_ordered`
 --
 
-CREATE TABLE `Item_ordered` (
+CREATE TABLE `item_ordered` (
   `order_number` int(4) NOT NULL,
   `product_ID` int(4) NOT NULL,
-  `quantity` int(5) NOT NULL
+  `quantity` int(5) NOT NULL,
+  `Total_Price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Order`
+-- Table structure for table `order1`
 --
 
-CREATE TABLE `Order` (
+CREATE TABLE `order1` (
   `order_number` int(4) NOT NULL,
   `customer_ID` int(4) NOT NULL,
-  `date` date NOT NULL,
-  `total_amount` double NOT NULL
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Products`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `Products` (
-  `product_id` int(4) NOT NULL,
-  `product_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+CREATE TABLE `orders` (
+  `id` int(15) NOT NULL,
+  `product_code` varchar(255) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `product_desc` varchar(255) NOT NULL,
   `price` int(10) NOT NULL,
-  `stock` int(10) NOT NULL,
-  `category` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `Products`
---
-
-INSERT INTO `Products` (`product_id`, `product_name`, `price`, `stock`, `category`) VALUES
-(1000, 'lays chips', 10, 100, 'Packed food');
+  `units` int(5) NOT NULL,
+  `total` int(15) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `email` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Supplies`
+-- Table structure for table `products`
 --
 
-CREATE TABLE `Supplies` (
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `product_code` varchar(60) NOT NULL,
+  `product_name` varchar(60) NOT NULL,
+  `product_desc` tinytext NOT NULL,
+  `product_img_name` varchar(60) NOT NULL,
+  `qty` int(5) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `Dept_id` int(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `product_code`, `product_name`, `product_desc`, `product_img_name`, `qty`, `price`, `Dept_id`) VALUES
+(1, 'ENZO1', 'Hotdog', 'The toppings include fresh cilantro, onion, as well as the more usual ketchup, mustard, and mayo.', 'hotdog.jpg', 20, 100.00, 1),
+(2, 'ENZO2', 'Paneer Tikka Masala', 'Marinated cottage cheese grilled over charcoal, cooked in a tomato gravy with cream and herbs', 'paneertikkamasala.jpg', 20, 200.00, 1),
+(3, 'ENZO3', 'Burger', 'Batter & breaded patty made of green peas, carrots, green beans, onions, potatoes, rice and spices, with eggless mayonnaise and lettuce, served in a sesame toasted bun', 'burger.jpg', 30, 100.00, 1),
+(4, 'ENZO4', 'Chilli Baby Corn', 'Marinated baby corn sautéed with capsicum, chilli sauce, soy sauce and chilli flakes', 'chillibabycorn.jpg', 20, 200.00, 1),
+(5, 'ENZO5', 'Mushroom Pasta', 'Sauteed mushrooms, fine chopped onions in danish butter with alfredo sauce and Italian herbs over fettuccine, accompanied with bread', 'mushroompasta.jpg', 15, 200.00, 1),
+(6, 'ENZO6', 'Coco Nova Cake', '(1 kg) Option to make it eggless on next step', 'cake.jpg', 10, 500.00, 1),
+(7, 'ENZO7', 'The Pinocchio', 'Feta cubes, fresh green bell pepper, pineapple chunks, red paprika, cilantro, herbed seasoning with mozzarella cheese', 'pinocchio.jpg', 15, 300.00, 1),
+(8, 'ENZO8', 'Hot Vegas', 'A super spicy blend of American golden corns, edam cheese, green bell peppers, a hint of cheddar and mozzarella with fine chopped onion and cucumber', 'hotvegas.jpg', 30, 200.00, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplies`
+--
+
+CREATE TABLE `supplies` (
   `vendor_ID` int(4) NOT NULL,
-  `product_ID` int(4) NOT NULL
+  `id` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `supplies`
+--
+
+INSERT INTO `supplies` (`vendor_ID`, `id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Vendors`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `Vendors` (
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `pin` int(6) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(15) NOT NULL,
+  `type` varchar(20) NOT NULL DEFAULT 'user'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendors`
+--
+
+CREATE TABLE `vendors` (
   `vendor_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `contact` int(10) NOT NULL,
+  `contact` bigint(10) NOT NULL,
   `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `vendor_ID` int(4) NOT NULL,
   `address` varchar(50) COLLATE utf8_unicode_ci NOT NULL
@@ -156,48 +201,65 @@ CREATE TABLE `Vendors` (
 --
 
 --
--- Indexes for table `Customer`
+-- Indexes for table `department_store`
 --
-ALTER TABLE `Customer`
-  ADD PRIMARY KEY (`customer_ID`);
+ALTER TABLE `department_store`
+  ADD PRIMARY KEY (`Dept_id`),
+  ADD KEY `FK_MGR` (`Manager_SSN`);
 
 --
--- Indexes for table `Employee`
+-- Indexes for table `employee`
 --
-ALTER TABLE `Employee`
-  ADD PRIMARY KEY (`employee_ID`);
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`Emp_SSN`);
 
 --
--- Indexes for table `Item_ordered`
+-- Indexes for table `item_ordered`
 --
-ALTER TABLE `Item_ordered`
-  ADD KEY `fk_ordid` (`order_number`),
-  ADD KEY `fk_prodid` (`product_ID`);
+ALTER TABLE `item_ordered`
+  ADD PRIMARY KEY (`order_number`,`product_ID`),
+  ADD KEY `fk_pro_jd` (`product_ID`);
 
 --
--- Indexes for table `Order`
+-- Indexes for table `order1`
 --
-ALTER TABLE `Order`
+ALTER TABLE `order1`
   ADD PRIMARY KEY (`order_number`),
-  ADD KEY `fk_custid` (`customer_ID`);
+  ADD KEY `fk_cus_ID` (`customer_ID`);
 
 --
--- Indexes for table `Products`
+-- Indexes for table `orders`
 --
-ALTER TABLE `Products`
-  ADD PRIMARY KEY (`product_id`);
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Supplies`
+-- Indexes for table `products`
 --
-ALTER TABLE `Supplies`
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_code` (`product_code`),
+  ADD KEY `FK_DEPTID` (`Dept_id`);
+
+--
+-- Indexes for table `supplies`
+--
+ALTER TABLE `supplies`
+  ADD PRIMARY KEY (`vendor_ID`,`id`),
   ADD KEY `fk_venid` (`vendor_ID`),
-  ADD KEY `fk_prdid` (`product_ID`);
+  ADD KEY `fk_prdid` (`id`) USING BTREE;
 
 --
--- Indexes for table `Vendors`
+-- Indexes for table `users`
 --
-ALTER TABLE `Vendors`
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `vendors`
+--
+ALTER TABLE `vendors`
   ADD PRIMARY KEY (`vendor_ID`);
 
 --
@@ -205,64 +267,70 @@ ALTER TABLE `Vendors`
 --
 
 --
--- AUTO_INCREMENT for table `Customer`
+-- AUTO_INCREMENT for table `order1`
 --
-ALTER TABLE `Customer`
-  MODIFY `customer_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1015;
+ALTER TABLE `order1`
+  MODIFY `order_number` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
--- AUTO_INCREMENT for table `Employee`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `Employee`
-  MODIFY `employee_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+ALTER TABLE `orders`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `Item_ordered`
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE `Item_ordered`
-  MODIFY `order_number` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `Order`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `Order`
-  MODIFY `order_number` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `Products`
+-- AUTO_INCREMENT for table `vendors`
 --
-ALTER TABLE `Products`
-  MODIFY `product_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
-
---
--- AUTO_INCREMENT for table `Vendors`
---
-ALTER TABLE `Vendors`
-  MODIFY `vendor_ID` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `vendors`
+  MODIFY `vendor_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Item_ordered`
+-- Constraints for table `department_store`
 --
-ALTER TABLE `Item_ordered`
-  ADD CONSTRAINT `fk_ordid` FOREIGN KEY (`order_number`) REFERENCES `Order` (`order_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_prdid` FOREIGN KEY (`product_ID`) REFERENCES `Products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `department_store`
+  ADD CONSTRAINT `FK_MGR` FOREIGN KEY (`Manager_SSN`) REFERENCES `employee` (`Emp_SSN`);
 
 --
--- Constraints for table `Order`
+-- Constraints for table `item_ordered`
 --
-ALTER TABLE `Order`
-  ADD CONSTRAINT `fk_custid` FOREIGN KEY (`customer_ID`) REFERENCES `Customer` (`customer_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `item_ordered`
+  ADD CONSTRAINT `fk_order_no` FOREIGN KEY (`order_number`) REFERENCES `order1` (`order_number`),
+  ADD CONSTRAINT `fk_pro_jd` FOREIGN KEY (`product_ID`) REFERENCES `products` (`id`);
 
 --
--- Constraints for table `Supplies`
+-- Constraints for table `order1`
 --
-ALTER TABLE `Supplies`
-  ADD CONSTRAINT `fk_prodid` FOREIGN KEY (`product_ID`) REFERENCES `Products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_venid` FOREIGN KEY (`vendor_ID`) REFERENCES `Vendors` (`vendor_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `order1`
+  ADD CONSTRAINT `fk_cus_ID` FOREIGN KEY (`customer_ID`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `FK_DEPTID` FOREIGN KEY (`Dept_id`) REFERENCES `department_store` (`Dept_id`);
+
+--
+-- Constraints for table `supplies`
+--
+ALTER TABLE `supplies`
+  ADD CONSTRAINT `fk_proid` FOREIGN KEY (`id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `fk_venid` FOREIGN KEY (`vendor_ID`) REFERENCES `vendors` (`vendor_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
